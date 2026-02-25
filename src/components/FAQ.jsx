@@ -1,77 +1,139 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function FAQ() {
+
+  // Animation Variants
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const fadeRight = {
+    hidden: { opacity: 0, x: 60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
     <section className="w-full bg-[#1a1a1a] text-white py-24">
 
       {/* CONTAINER */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-20">
+      <motion.div
+        className="max-w-[1400px] mx-auto px-6 md:px-20"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
 
         {/* HEADING */}
-        <h2 className="text-yellow-400 text-3xl md:text-4xl font-bold">
+        <motion.h2
+          variants={fadeUp}
+          className="text-yellow-400 text-3xl md:text-4xl font-bold"
+        >
           FAQs
-        </h2>
+        </motion.h2>
 
         {/* LINE */}
-        <div className="w-full h-[1px] bg-gray-600 mt-6 mb-12"></div>
+        <motion.div
+          variants={fadeUp}
+          className="w-full h-[1px] bg-gray-600 mt-6 mb-12"
+        />
 
         {/* CONTENT */}
         <div className="grid md:grid-cols-[1fr_420px] gap-16">
 
           {/* LEFT SIDE */}
-          <div>
+          <motion.div variants={fadeLeft}>
 
-            {/* QUESTION */}
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">
+            <motion.h3
+              variants={fadeUp}
+              className="text-xl md:text-2xl font-semibold mb-6 hover:text-orange-400 transition"
+            >
               What Is Average Cost Of The Project? ↗
-            </h3>
+            </motion.h3>
 
-            {/* ANSWERS */}
-            <p className="text-gray-400 leading-relaxed mb-8 max-w-[450px]">
+            <motion.p
+              variants={fadeUp}
+              className="text-gray-400 leading-relaxed mb-8 max-w-[450px]"
+            >
               From My Experience, I Saw Individuals Perpetually Wish
               To Induce An Internet Site For Their Work Or One
-            </p>
+            </motion.p>
 
-            <p className="text-gray-400 leading-relaxed max-w-[450px]">
+            <motion.p
+              variants={fadeUp}
+              className="text-gray-400 leading-relaxed max-w-[450px]"
+            >
               From My Experience, I Saw Individuals Perpetually Wish
               To Induce An Internet Site For Their Work Or One
-            </p>
+            </motion.p>
 
-          </div>
+          </motion.div>
 
           {/* RIGHT SIDE */}
-          <div className="flex flex-col gap-6">
+          <motion.div
+            variants={fadeRight}
+            className="flex flex-col gap-6"
+          >
 
-            <div className="flex justify-between items-center border-b border-gray-700 pb-3">
-              <span>How Can I Work With You?</span>
-              <span className="text-orange-500">↗</span>
-            </div>
+            {[
+              "How Can I Work With You?",
+              "What Kind Of Work You Completed Recently",
+              "Have You Done Any Kind Of National Work",
+              "Hey I’m Nick Nice Yo Meet You",
+              "Perpetually Wish To Induce An Intern"
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                whileHover={{ x: 10 }}
+                className="flex justify-between items-center border-b border-gray-700 pb-3 cursor-pointer group"
+              >
+                <span className="group-hover:text-orange-400 transition">
+                  {item}
+                </span>
 
-            <div className="flex justify-between items-center border-b border-gray-700 pb-3">
-              <span>What Kind Of Work You Completed Recently</span>
-              <span className="text-orange-500">↗</span>
-            </div>
+                <motion.span
+                  whileHover={{ rotate: 45 }}
+                  className="text-orange-500"
+                >
+                  ↗
+                </motion.span>
+              </motion.div>
+            ))}
 
-            <div className="flex justify-between items-center border-b border-gray-700 pb-3">
-              <span>Have You Done Any Kind Of National Work</span>
-              <span className="text-orange-500">↗</span>
-            </div>
-
-            <div className="flex justify-between items-center border-b border-gray-700 pb-3">
-              <span>Hey I’m Nick Nice Yo Meet You</span>
-              <span className="text-orange-500">↗</span>
-            </div>
-
-            <div className="flex justify-between items-center border-b border-gray-700 pb-3">
-              <span>Perpetually Wish To Induce An Intern</span>
-              <span className="text-orange-500">↗</span>
-            </div>
-
-          </div>
+          </motion.div>
 
         </div>
 
-      </div>
+      </motion.div>
 
     </section>
   );
